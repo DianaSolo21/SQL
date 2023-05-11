@@ -1,0 +1,28 @@
+CREATE TABLE fishing_gear (id INTEGER PRIMARY KEY, item TEXT, price INTEGER, quantity INTEGER, aisle INTEGER);
+INSERT INTO fishing_gear VALUES (1, "Fishing Poles", 65, 25, 1);
+INSERT INTO fishing_gear VALUES (2, "fishing Reels", 40, 30,1);
+INSERT INTO fishing_gear VALUES (3,"Bait",5,44,2);
+insert into fishing_gear values (4,"Lines",10, 30,3);
+INSERT INTO fishing_gear VALUES (5,"Bobbers", 3,30,4);
+INSERT INTO fishing_gear VALUES (6, "Weights",8,43,4);
+INSERT INTO fishing_gear VALUES (7,"Nets", 15, 15,3);
+INSERT INTO fishing_gear VALUES (8,"Coolers", 35, 10,5);
+INSERT INTO fishing_gear VALUES (9, "Buckets", 10,15,5);
+INSERT INTO fishing_gear VALUES (10,"Tackle Boxes", 30, 8,4);
+INSERT INTO fishing_gear VALUES (11,"Boots",40,18,6);
+INSERT INTO fishing_gear VALUES (12, "Lures",5,30,4);
+INSERT INTO fishing_gear VALUES (13,"Coats",30,15,6);
+INSERT INTO fishing_gear VALUES (14,"Life Jackets", 24, 8, 6);
+INSERT INTO fishing_gear VALUES (15, "Hooks",3,50,3);  
+
+-Order database by aisle, only showing aisle, item and price-
+SELECT aisle,item,price FROM fishing_gear ORDER BY aisle;
+
+-What is the cost of all the fishing items- 
+SELECT SUM(price) FROM fishing_gear;
+
+-Order by inventory low to high- 
+SELECT * FROM fishing_gear ORDER BY quantity ASC; 
+
+-Select the 5 most expensive products-
+SELECT * FROM fishing_gear ORDER BY price DESC LIMIT 5;
