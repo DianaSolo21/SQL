@@ -1,0 +1,53 @@
+#In this SQL, I downloaded a database onto SQlite and queried the following. 
+
+#1. How many customers are from outside the US?
+
+SELECT COUNT(CustomerId)
+FROM customers
+WHERE country <> "USA";
+
+#2. How many customers are there in each country?
+
+SELECT country,
+COUNT(CustomerId) as Total_customers
+FROM customers 
+GROUP BY country
+ORDER BY Total_customers DESC; 
+
+#3. How many sales did each agent make?
+
+SELECT employees.FirstName,
+employees.LastName,
+SUM(customers.supportRepId) AS Sales 
+FROM employees
+INNER JOIN customers
+ON customers.supportRepId=employees.EmployeeId
+GROUP BY employees.EmployeeId;
+
+#4. How much revenue was made in each country?
+SELECT billingcountry, SUM(total) AS total_sales
+FROM invoices 
+GROUP BY BillingCountry 
+ORDER BY total_sales DESC;
+
+#5. Show each album name with the song titles within the album and the artist.
+SELECT a.Title,
+t.Name,
+ar.Name
+FROM albums a
+LEFT JOIN tracks t 
+ON a.AlbumId=t.AlbumId
+INNER JOIN artists ar
+ON a.ArtistId=ar.ArtistId;
+
+#6. How much revenue did each sales agent bring in?
+SELECT e.FirstName,
+e.LastName,
+SUM(c.supportRepId) AS Sales,
+ROUND(SUM(i.total)) as Revenue
+FROM employees e
+INNER JOIN customers c
+ON c.supportRepId=e.EmployeeId
+LEFT JOIN invoices i
+ON i.CustomerId=c.CustomerId
+GROUP BY e.EmployeeId;
